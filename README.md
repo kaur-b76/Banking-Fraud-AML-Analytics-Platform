@@ -592,3 +592,5 @@ Tables Created
 # Data Validation
 Verify Total Transactions
 SELECT COUNT(*) AS "Total Transactions" FROM Transactions;
+
+! (https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-19%20at%2022.46.12.png)
