@@ -641,5 +641,21 @@ WHERE "Is_Fraud" = 'Yes'
 GROUP BY "Fraud_Type"
 ORDER BY "Fraud Count" DESC;
 
+![Fraud Type Distribution](https://raw.githubusercontent.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/main/Screenshot%202026-07-20%20at%2000.17.41.png)
 
 Fraud incidents are distributed across multiple fraud categories including Friendly Fraud, Synthetic Identity, Card Not Present, Identity Theft, Account Takeover, Phishing, and Merchant Fraud. Understanding these patterns helps prioritize fraud prevention strategies.
+
+**Fraud by Customer Risk Level**
+
+SELECT
+    c."Risk_Level",
+    COUNT(t."Transaction_ID") AS "Fraud Transactions",
+    ROUND(SUM(t."Amount"),2) AS "Fraud Amount"
+FROM Customers c
+JOIN Transactions t
+ON c."Customer_ID" = t."Customer_ID"
+WHERE t."Is_Fraud"='Yes'
+GROUP BY c."Risk_Level"
+ORDER BY "Fraud Amount" DESC;
+
+This query analyzes fraudulent transactions by customer risk level. It joins the Customers and Transactions tables using the Customer_ID field, filters only fraudulent transactions, and groups the results by customer risk category. The output shows the total number of fraudulent transactions and the total fraud amount associated with each risk level.
