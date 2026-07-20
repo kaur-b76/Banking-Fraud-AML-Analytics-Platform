@@ -698,3 +698,88 @@ This query identifies the top 10 customers with the highest total fraudulent tra
 Business Insight
 
 Identifying customers responsible for the highest fraud losses enables fraud analysts to prioritize investigations and allocate resources more effectively. Customers with repeated or high-value fraudulent transactions may require enhanced due diligence, account monitoring, or regulatory review as part of fraud prevention and AML programs.
+
+**Fraud by Province**
+
+SELECT
+    "Province",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"),2) AS "Total Fraud Amount"
+FROM Transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY "Province"
+ORDER BY "Total Fraud Amount" DESC;
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.28.15.png)
+
+Description
+
+This query analyzes fraudulent transactions by Canadian province. It filters only fraudulent transactions, groups the data by province, and calculates both the total number of fraudulent transactions and the total fraud amount for each province. The results are sorted in descending order of fraud amount to identify regions with the highest financial losses.
+
+Business Insight
+
+Geographic analysis helps financial institutions identify fraud hotspots and regional trends. Provinces with higher fraud volumes or losses may require enhanced monitoring, additional fraud prevention measures, or targeted investigations to reduce financial risk.
+
+**Fraud by Payment Method**
+
+SELECT
+    "Payment_Method",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"), 2) AS "Total Fraud Amount"
+FROM Transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY "Payment_Method"
+ORDER BY "Total Fraud Amount" DESC;
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.32.26.png)
+
+Description
+
+This query examines fraudulent transactions by payment method. It filters fraudulent transactions, groups them by payment method, and calculates both the number of fraudulent transactions and the total fraud amount associated with each payment type. The results are sorted by total fraud amount to highlight the payment methods with the highest financial impact.
+
+Business Insight
+
+Understanding which payment methods are most frequently associated with fraud enables financial institutions to strengthen transaction monitoring and implement targeted fraud prevention controls. Payment methods with higher fraud losses may require additional authentication, risk scoring, or real-time monitoring.
+
+**Fraud by Merchant Category**
+
+SELECT
+    "Merchant_Category",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"), 2) AS "Total Fraud Amount"
+FROM Transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY "Merchant_Category"
+ORDER BY "Total Fraud Amount" DESC;
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.35.46.png)
+
+Description
+
+This query analyzes fraudulent transactions across different merchant categories. It filters only fraudulent transactions, groups them by merchant category, and calculates both the total number of fraudulent transactions and the total fraud amount for each category. The results are ranked by total fraud amount to identify industries with the greatest financial losses.
+
+Business Insight
+
+Merchant category analysis helps financial institutions identify industries that are more susceptible to fraudulent activity. These insights support risk-based transaction monitoring, fraud prevention strategies, and merchant-specific controls to reduce financial losses.
+
+**Monthly Fraud Trend**
+
+SELECT
+    DATE_TRUNC('month', "Transaction_Date") AS "Month",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"), 2) AS "Total Fraud Amount"
+FROM Transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY DATE_TRUNC('month', "Transaction_Date")
+ORDER BY "Month";
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.38.04.png)
+
+Description
+
+This query analyzes fraudulent transactions over time by grouping them into monthly periods. It filters only fraudulent transactions and calculates both the number of fraud cases and the total fraud amount for each month. The results are displayed chronologically to identify trends and seasonal patterns in fraudulent activity.
+
+Business Insight
+
+Monitoring fraud trends over time helps financial institutions identify periods of increased fraud activity and evaluate the effectiveness of fraud prevention strategies. A sudden increase in fraud volume may indicate emerging fraud schemes or operational risks that require immediate investigation.
+
