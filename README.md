@@ -565,13 +565,13 @@ By completing this project, the goal is to develop an analytics solution capable
 
 ---
 
-# Phase 1: Synthetic Dataset Generation
+# Synthetic Dataset Generation
 - Generated 10,000 synthetic customers.
 - Generated 10,000 bank accounts.
 - Generated 1,000,000 banking transactions.
 - Exported all datasets as CSV files.
 
-# Phase 2: PostgreSQL Database Setup
+# PostgreSQL Database Setup
 # Software Used
 - PostgreSQL 18
 - pgAdmin 4
