@@ -590,7 +590,7 @@ Tables Created
 | Transactions | 1,000,000 |
 
 # Data Validation
-Verified Total Transactions
+**Total Transactions**
 
 SELECT COUNT(*) AS "Total Transactions" FROM Transactions;
 
