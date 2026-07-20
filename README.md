@@ -597,3 +597,32 @@ SELECT COUNT(*) AS "Total Transactions" FROM Transactions;
 ![PostgreSQL Tables](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-19%20at%2022.46.12.png)
 
 Imported 1,000,000 transaction records into PostgreSQL 18 without data loss. 
+
+**Transaction Summary**
+
+SELECT
+    COUNT(*) AS "Total Transactions",
+    SUM("Amount") AS "Total Transaction Amount",
+    AVG("Amount") AS "Average Transaction Amount",
+    MIN("Amount") AS "Minimum Transaction",
+    MAX("Amount") AS "Maximum Transaction"
+FROM Transactions;
+
+
+The transaction dataset contains 1,000,000 synthetic banking transactions with a total transaction value exceeding $4.0 billion. The average transaction amount is approximately $4,002, providing a realistic, high-volume dataset for fraud analytics and transaction monitoring.
+
+**Fraud Rate Analysis**
+
+SELECT
+    "Is_Fraud",
+    COUNT(*) AS "Total Transactions",
+    ROUND(
+        COUNT(*) * 100.0 /
+        (SELECT COUNT(*) FROM Transactions),
+        2
+    ) AS "Fraud Percentage"
+FROM Transactions
+GROUP BY "Is_Fraud"
+ORDER BY "Total Transactions" DESC;
+
+Out of 1,000,000 transactions, 25,334 were classified as fraudulent, resulting in a fraud rate of approximately 2.53%. This dataset provides a balanced environment for fraud detection and investigative analytics.
