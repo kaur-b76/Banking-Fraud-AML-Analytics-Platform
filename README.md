@@ -55,20 +55,19 @@ The primary objectives of this project are to:
 
 # Technology Stack
 
-| Technology | Purpose |
-|---|---|
-| Python | Synthetic banking dataset generation |
-| Pandas | Data manipulation and dataset creation |
-| NumPy | Randomization and risk-based data generation |
-| Faker | Generation of synthetic customer information |
-| Jupyter Notebook | Development and execution of the dataset generation process |
-| SQL Server | Storage and management of banking datasets |
-| SQL Server Management Studio (SSMS) | Data validation and SQL analysis |
-| SQL | Fraud, AML, customer risk, and investigation analysis |
-| Power BI | Data modeling, DAX calculations, and interactive dashboards |
-| GitHub | Project documentation and portfolio presentation |
+| Technology       | Purpose                              | Version        |
+| ---------------- | ------------------------------------ | -------------- |
+| Python           | Synthetic banking dataset generation | 3.x            |
+| Pandas           | Data manipulation                    | Latest         |
+| NumPy            | Synthetic data generation            | Latest         |
+| Faker            | Customer data generation             | Latest         |
+| Jupyter Notebook | Dataset generation                   | Latest         |
+| PostgreSQL       | Relational database                  | **18**         |
+| pgAdmin 4        | PostgreSQL administration            | **Latest**     |
+| SQL              | Fraud & AML analysis                 | PostgreSQL SQL |
+| Power BI         | Dashboard development                | Desktop        |
+| GitHub           | Version control & documentation      | Latest         |
 
----
 
 # Project Workflow
 
@@ -566,19 +565,8 @@ By completing this project, the goal is to develop an analytics solution capable
 
 ---
 
-# Next Steps
-
-The next phases of the project include:
-
-1. Loading the synthetic datasets into SQL Server.
-2. Performing data validation and quality checks.
-3. Developing SQL queries for fraud analysis.
-4. Developing SQL queries for AML and customer risk analysis.
-5. Using CTEs and window functions for advanced transaction analysis.
-6. Creating reusable SQL views.
-7. Connecting SQL Server to Power BI.
-8. Developing an Executive Fraud Overview dashboard.
-9. Developing a Fraud Analysis dashboard.
-10. Developing an AML and Customer Risk dashboard.
-11. Developing an Investigation Management dashboard.
-12. Documenting key findings and business recommendations.
+# Phase 1: Synthetic Dataset Generation
+- Generated 10,000 synthetic customers.
+- Generated 10,000 bank accounts.
+- Generated 1,000,000 banking transactions.
+- Exported all datasets as CSV files.
