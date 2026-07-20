@@ -608,6 +608,7 @@ SELECT
     MAX("Amount") AS "Maximum Transaction"
 FROM Transactions;
 
+![Transaction Summary](https://raw.githubusercontent.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/main/Screenshot%202026-07-19%20at%2023.24.56.png)
 
 The transaction dataset contains 1,000,000 synthetic banking transactions with a total transaction value exceeding $4.0 billion. The average transaction amount is approximately $4,002, providing a realistic, high-volume dataset for fraud analytics and transaction monitoring.
 
