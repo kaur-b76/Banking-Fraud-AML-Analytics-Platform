@@ -667,3 +667,34 @@ This query analyzes fraudulent transactions by customer risk level. It joins the
 Business Insight
 
 Comparing fraud activity across High, Medium, and Low risk customers helps financial institutions determine whether fraud is concentrated within specific customer segments. These insights support risk-based monitoring, fraud investigations, and compliance with Anti-Money Laundering (AML) programs.
+
+**Top 10 Customers by Fraud Amount**
+
+SELECT
+    c."Customer_ID",
+    c."First_Name",
+    c."Last_Name",
+    c."Risk_Level",
+    COUNT(t."Transaction_ID") AS "Fraud Transactions",
+    ROUND(SUM(t."Amount"),2) AS "Total Fraud Amount"
+FROM Customers c
+JOIN Transactions t
+ON c."Customer_ID" = t."Customer_ID"
+WHERE t."Is_Fraud"='Yes'
+GROUP BY
+    c."Customer_ID",
+    c."First_Name",
+    c."Last_Name",
+    c."Risk_Level"
+ORDER BY "Total Fraud Amount" DESC
+LIMIT 10;
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.24.49.png)
+
+Description
+
+This query identifies the top 10 customers with the highest total fraudulent transaction amounts. It joins the Customers and Transactions tables, filters only fraudulent transactions, aggregates the fraud amount and transaction count for each customer, and ranks them in descending order of total fraud value.
+
+Business Insight
+
+Identifying customers responsible for the highest fraud losses enables fraud analysts to prioritize investigations and allocate resources more effectively. Customers with repeated or high-value fraudulent transactions may require enhanced due diligence, account monitoring, or regulatory review as part of fraud prevention and AML programs.
