@@ -570,3 +570,25 @@ By completing this project, the goal is to develop an analytics solution capable
 - Generated 10,000 bank accounts.
 - Generated 1,000,000 banking transactions.
 - Exported all datasets as CSV files.
+
+# Phase 2: PostgreSQL Database Setup
+# Software Used
+- PostgreSQL 18
+- pgAdmin 4
+
+# Database Created - banking_aml
+Tables Created
+- Customers
+- Accounts
+- Transactions
+
+# Data Imported
+| Table        |   Records |
+| ------------ | --------: |
+| Customers    |    10,000 |
+| Accounts     |    10,000 |
+| Transactions | 1,000,000 |
+
+# Data Validation
+Verify Total Transactions
+SELECT COUNT(*) AS "Total Transactions" FROM Transactions;
