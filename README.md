@@ -626,4 +626,6 @@ FROM Transactions
 GROUP BY "Is_Fraud"
 ORDER BY "Total Transactions" DESC;
 
+![Fraud Rate Analysis](https://raw.githubusercontent.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/main/Screenshot%202026-07-19%20at%2023.26.33.png)
+
 Out of 1,000,000 transactions, 25,334 were classified as fraudulent, resulting in a fraud rate of approximately 2.53%. This dataset provides a balanced environment for fraud detection and investigative analytics.
