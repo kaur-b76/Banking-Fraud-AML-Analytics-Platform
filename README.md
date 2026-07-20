@@ -658,4 +658,6 @@ WHERE t."Is_Fraud"='Yes'
 GROUP BY c."Risk_Level"
 ORDER BY "Fraud Amount" DESC;
 
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.19.37.png)
+
 This query analyzes fraudulent transactions by customer risk level. It joins the Customers and Transactions tables using the Customer_ID field, filters only fraudulent transactions, and groups the results by customer risk category. The output shows the total number of fraudulent transactions and the total fraud amount associated with each risk level.
