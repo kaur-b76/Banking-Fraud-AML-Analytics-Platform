@@ -629,3 +629,17 @@ ORDER BY "Total Transactions" DESC;
 ![Fraud Rate Analysis](https://raw.githubusercontent.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/main/Screenshot%202026-07-19%20at%2023.26.33.png)
 
 Out of 1,000,000 transactions, 25,334 were classified as fraudulent, resulting in a fraud rate of approximately 2.53%. This dataset provides a balanced environment for fraud detection and investigative analytics.
+
+**Fraud Type Distribution**
+
+SELECT
+    "Fraud_Type",
+    COUNT(*) AS "Fraud Count",
+    ROUND(SUM("Amount"),2) AS "Total Fraud Amount"
+FROM Transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY "Fraud_Type"
+ORDER BY "Fraud Count" DESC;
+
+
+Fraud incidents are distributed across multiple fraud categories including Friendly Fraud, Synthetic Identity, Card Not Present, Identity Theft, Account Takeover, Phishing, and Merchant Fraud. Understanding these patterns helps prioritize fraud prevention strategies.
