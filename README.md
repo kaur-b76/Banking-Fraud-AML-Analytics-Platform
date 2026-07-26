@@ -847,3 +847,25 @@ This query analyzes fraudulent transactions by device type. It filters only frau
 Business Insight
 
 Analyzing fraud by device type enables financial institutions to identify devices that present a higher fraud risk. A higher concentration of fraudulent transactions originating from a particular device type may indicate vulnerabilities in authentication mechanisms or increased exploitation by fraudsters. These insights help banks strengthen device-based risk controls, enhance authentication processes, and prioritize fraud monitoring for high-risk devices to reduce financial losses and improve customer security.
+
+**Fraud by Channel**
+
+SELECT
+    "Channel",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"), 2) AS "Total Fraud Amount",
+    ROUND(AVG("Amount"), 2) AS "Average Fraud Amount"
+FROM transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY "Channel"
+ORDER BY "Fraud Transactions" DESC;
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2021.22.37.png)
+
+Description
+
+This query analyzes fraudulent transactions across different banking channels. It filters only fraudulent transactions and groups them by transaction channel to calculate the total number of fraud cases, total fraud amount, and average fraud amount. The results help identify which banking channels experience the highest concentration of fraudulent activity.
+
+Business Insight
+
+Analyzing fraud by transaction channel enables financial institutions to identify channels that are more vulnerable to fraudulent activities. A higher volume of fraud within a specific channel may indicate weaknesses in authentication controls or increased exploitation by fraudsters. These insights help banks strengthen channel-specific security measures, enhance fraud detection rules, and allocate monitoring resources to high-risk transaction channels, ultimately reducing financial losses and improving customer protection.
