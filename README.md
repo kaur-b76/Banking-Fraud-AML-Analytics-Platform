@@ -803,3 +803,25 @@ This query analyzes fraudulent transactions based on the hour in which they occu
 Business Insight
 
 Analyzing fraud by hour of day helps financial institutions identify time periods with elevated fraud risk. In this dataset, fraudulent transactions are significantly higher during the late-night and early-morning hours (approximately 12:00 AM–4:00 AM), with another noticeable increase around 11:00 PM. These patterns may indicate that fraudsters prefer to perform unauthorized transactions during off-peak hours when customer activity and operational monitoring are generally lower. Such insights enable banks to strengthen real-time fraud detection rules, schedule additional monitoring during high-risk periods, and implement enhanced authentication or transaction verification for suspicious activities occurring outside normal business hours.
+
+**Fraud by Day of Week**
+
+SELECT
+    TRIM(TO_CHAR("Transaction_Date", 'Day')) AS "Day of Week",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"), 2) AS "Total Fraud Amount"
+FROM transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY TRIM(TO_CHAR("Transaction_Date", 'Day')),
+         EXTRACT(DOW FROM "Transaction_Date")
+ORDER BY EXTRACT(DOW FROM "Transaction_Date");
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2020.11.16.png)
+
+Description
+
+This query analyzes fraudulent transactions by the day of the week on which they occurred. It filters only fraudulent transactions and groups them by weekday to calculate the total number of fraud cases and the total fraud amount. The results are displayed in chronological order from Sunday through Saturday, making it easier to identify weekly fraud patterns.
+
+Business Insight
+
+Analyzing fraud by day of the week helps financial institutions identify recurring weekly patterns in fraudulent activity. Higher fraud volumes on specific days may be influenced by customer transaction behavior, payment cycles, weekends, or reduced operational monitoring. These insights enable fraud teams to optimize staffing, strengthen monitoring during high-risk periods, and refine fraud detection rules to proactively identify suspicious transactions before significant financial losses occur.
