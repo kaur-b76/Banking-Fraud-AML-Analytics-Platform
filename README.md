@@ -825,3 +825,25 @@ This query analyzes fraudulent transactions by the day of the week on which they
 Business Insight
 
 Analyzing fraud by day of the week helps financial institutions identify recurring weekly patterns in fraudulent activity. Higher fraud volumes on specific days may be influenced by customer transaction behavior, payment cycles, weekends, or reduced operational monitoring. These insights enable fraud teams to optimize staffing, strengthen monitoring during high-risk periods, and refine fraud detection rules to proactively identify suspicious transactions before significant financial losses occur.
+
+**Fraud by Device Type**
+
+SELECT
+    "Device_Type",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"), 2) AS "Total Fraud Amount",
+    ROUND(AVG("Amount"), 2) AS "Average Fraud Amount"
+FROM transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY "Device_Type"
+ORDER BY "Fraud Transactions" DESC;
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2020.14.56.png)
+
+Description
+
+This query analyzes fraudulent transactions by device type. It filters only fraudulent transactions and groups them based on the device used to initiate the transaction. For each device type, it calculates the total number of fraud cases, total fraud amount, and average fraud amount, helping identify which devices are most frequently associated with fraudulent activity.
+
+Business Insight
+
+Analyzing fraud by device type enables financial institutions to identify devices that present a higher fraud risk. A higher concentration of fraudulent transactions originating from a particular device type may indicate vulnerabilities in authentication mechanisms or increased exploitation by fraudsters. These insights help banks strengthen device-based risk controls, enhance authentication processes, and prioritize fraud monitoring for high-risk devices to reduce financial losses and improve customer security.
