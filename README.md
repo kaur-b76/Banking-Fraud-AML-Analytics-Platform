@@ -783,3 +783,23 @@ Business Insight
 
 Monitoring fraud trends over time helps financial institutions identify periods of increased fraud activity and evaluate the effectiveness of fraud prevention strategies. A sudden increase in fraud volume may indicate emerging fraud schemes or operational risks that require immediate investigation.
 
+**Time-of-Day Fraud Analysis**
+
+SELECT
+    EXTRACT(HOUR FROM "Transaction_Timestamp") AS "Hour of Day",
+    COUNT(*) AS "Fraud Transactions",
+    ROUND(SUM("Amount"), 2) AS "Total Fraud Amount"
+FROM transactions
+WHERE "Is_Fraud" = 'Yes'
+GROUP BY EXTRACT(HOUR FROM "Transaction_Timestamp")
+ORDER BY "Hour of Day";
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2018.47.54.png)
+
+Description
+
+This query analyzes fraudulent transactions based on the hour in which they occurred. It extracts the hour from the transaction timestamp, filters only fraudulent transactions, and calculates the total number of fraudulent transactions along with the total fraud amount for each hour of the day. The results are sorted chronologically to identify peak hours of fraudulent activity.
+
+Business Insight
+
+Analyzing fraud by hour of day helps financial institutions identify time periods with elevated fraud risk. In this dataset, fraudulent transactions are significantly higher during the late-night and early-morning hours (approximately 12:00 AM–4:00 AM), with another noticeable increase around 11:00 PM. These patterns may indicate that fraudsters prefer to perform unauthorized transactions during off-peak hours when customer activity and operational monitoring are generally lower. Such insights enable banks to strengthen real-time fraud detection rules, schedule additional monitoring during high-risk periods, and implement enhanced authentication or transaction verification for suspicious activities occurring outside normal business hours.
