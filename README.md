@@ -869,3 +869,5 @@ This query analyzes fraudulent transactions across different banking channels. I
 Business Insight
 
 Analyzing fraud by transaction channel enables financial institutions to identify channels that are more vulnerable to fraudulent activities. A higher volume of fraud within a specific channel may indicate weaknesses in authentication controls or increased exploitation by fraudsters. These insights help banks strengthen channel-specific security measures, enhance fraud detection rules, and allocate monitoring resources to high-risk transaction channels, ultimately reducing financial losses and improving customer protection.
+
+## The next enhancement is to develop a rule-based Fraud & AML Detection Engine that identifies suspicious transactions using banking business rules. This includes implementing High Value Transaction Detection, Velocity Detection, International Transaction Monitoring, Structuring Detection, Customer Risk Scoring, and Fraud Alert Generation before integrating these results into interactive Power BI dashboards.
