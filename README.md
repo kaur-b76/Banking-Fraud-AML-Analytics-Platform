@@ -870,4 +870,32 @@ Business Insight
 
 Analyzing fraud by transaction channel enables financial institutions to identify channels that are more vulnerable to fraudulent activities. A higher volume of fraud within a specific channel may indicate weaknesses in authentication controls or increased exploitation by fraudsters. These insights help banks strengthen channel-specific security measures, enhance fraud detection rules, and allocate monitoring resources to high-risk transaction channels, ultimately reducing financial losses and improving customer protection.
 
-## The next enhancement is to develop a rule-based Fraud & AML Detection Engine that identifies suspicious transactions using banking business rules. This includes implementing High Value Transaction Detection, Velocity Detection, International Transaction Monitoring, Structuring Detection, Customer Risk Scoring, and Fraud Alert Generation before integrating these results into interactive Power BI dashboards.
+## **The next enhancement is to develop a rule-based Fraud & AML Detection Engine that identifies suspicious transactions using banking business rules. This includes implementing High Value Transaction Detection, Velocity Detection, International Transaction Monitoring, Structuring Detection, Customer Risk Scoring, and Fraud Alert Generation before integrating these results into interactive Power BI dashboards.**
+
+# High Value Transaction Detection Rule
+
+A new column, **Rule_High_Value**, has been introduced in the `transactions` table to store the outcome of the High Value Transaction Detection Rule. This rule is implemented separately from the original dataset to preserve the existing fraud indicators while enabling a custom, rule-based fraud detection engine. The same design approach will be used for additional fraud and AML rules, allowing each rule to be evaluated independently before contributing to the overall customer risk assessment.
+
+UPDATE transactions
+SET "Rule_High_Value" =
+CASE
+    WHEN "Amount" >= 7000 THEN 'Yes'
+    ELSE 'No'
+END;
+
+## Rule Logic
+
+The High Value Transaction Rule classifies each transaction based on its monetary value.
+
+Transactions with an amount greater than or equal to **$7,000** are marked as **Yes** in the `Rule_High_Value` column, while all remaining transactions are marked as **No**.
+
+This rule serves as one of the independent fraud indicators within the custom Fraud & AML Rule Engine. On its own, it does not determine whether a transaction is fraudulent; instead, it contributes to a broader risk assessment when combined with additional fraud and AML detection rules.
+
+SELECT
+    "Rule_High_Value",
+    COUNT(*) AS Total
+FROM transactions
+GROUP BY "Rule_High_Value";
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot 2026-08-07 at 18.07.01.png)
+
