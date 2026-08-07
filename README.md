@@ -897,5 +897,4 @@ SELECT
 FROM transactions
 GROUP BY "Rule_High_Value";
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot 2026-08-07 at 18.07.01.png)
-
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%2026-08-07%at%18.07.01.png)
