@@ -936,3 +936,42 @@ ORDER BY
 Transaction counts varied across customers and transaction types. For example, Customer 1 recorded 12 Bill Payments, 24 Deposits, 27 Purchases, 21 Transfers, and 13 Withdrawals.
 
 The analysis provides a behavioral baseline for each customer and transaction type. The results will be used to determine whether transaction frequency can support additional AML detection rules.
+
+### Transaction Amount Analysis by Type
+
+SELECT
+    "Transaction_Type",
+    COUNT(*) AS transaction_count,
+    ROUND(AVG("Amount"), 2) AS average_amount,
+    ROUND(MAX("Amount"), 2) AS maximum_amount
+FROM transactions
+GROUP BY "Transaction_Type"
+ORDER BY maximum_amount DESC;
+
+Analyzed transaction amounts across each transaction type using transaction count, average amount, and maximum amount.
+
+The results showed a similar distribution across all transaction types:
+
+| Transaction Type | Transaction Count | Average Amount | Maximum Amount |
+| ---------------- | ----------------: | -------------: | -------------: |
+| Bill Payment     |           200,696 |      $4,001.38 |      $7,999.99 |
+| Transfer         |           199,763 |      $4,001.50 |      $7,999.99 |
+| Deposit          |           200,421 |      $4,003.30 |      $7,999.98 |
+| Purchase         |           199,383 |      $4,004.14 |      $7,999.97 |
+| Withdrawal       |           199,737 |      $4,001.86 |      $7,999.94 |
+
+The average transaction amounts are approximately $4,000 across all transaction types, while the maximum values are consistently close to $8,000. This indicates that transaction type does not materially change the typical transaction amount in this dataset.
+
+The existing High Value Transaction Rule is therefore retained as the primary amount-based detection rule rather than creating separate amount thresholds for each transaction type.
+
+### AML Rule Validation Results
+
+Validated the outputs of the implemented AML detection rules by counting flagged and non-flagged transactions.
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.21.14.png)
+
+The `Rule_High_Value` rule flagged 125,046 transactions, representing approximately 12.50% of the dataset.
+
+The `Rule_High_Velocity` rule flagged 2,266 transactions, representing approximately 0.23% of the dataset.
+
+This validation is important because it shows the coverage of each detection rule. The high-value rule identifies a broader set of transactions, while the high-velocity rule is more selective and identifies relatively uncommon transaction-frequency patterns.
