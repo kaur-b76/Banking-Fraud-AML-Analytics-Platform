@@ -970,9 +970,11 @@ Validated the outputs of the implemented AML detection rules by counting flagged
 
 ![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.21.14.png)
 
-The `Rule_High_Value` rule flagged 125,046 transactions, representing approximately 12.50% of the dataset.
+**High Value Rule:** Identifies transactions that meet the defined high-value transaction threshold. It flagged 125,046 transactions, representing 12.50% of the dataset.
 
-The `Rule_High_Velocity` rule flagged 2,266 transactions, representing approximately 0.23% of the dataset.
+**High Velocity Rule:** Identifies customers with 5 or more transactions within a rolling 24-hour period. It flagged 2,266 transactions, representing 0.23% of the dataset.
+
+This validation is important because it confirms that both detection rules are producing measurable results and shows how frequently each rule is triggered across the dataset. The High Value rule provides broader coverage, while the High Velocity rule is more selective and identifies less common transaction-frequency patterns.
 
 # High Velocity Transaction Detection Rule
 
