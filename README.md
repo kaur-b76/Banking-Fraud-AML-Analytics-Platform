@@ -974,4 +974,26 @@ The `Rule_High_Value` rule flagged 125,046 transactions, representing approximat
 
 The `Rule_High_Velocity` rule flagged 2,266 transactions, representing approximately 0.23% of the dataset.
 
+# High Velocity Transaction Detection Rule
+
+A new column, `Rule_High_Velocity`, was introduced in the `transactions` table to identify customers with unusually high transaction frequency.
+
+## Rule Logic
+
+The rule uses a rolling 24-hour window for each customer.
+
+A transaction is flagged as `Yes` when the customer has completed 5 or more transactions within the previous 24 hours. Otherwise, it is marked as `No`.
+
+This rule is designed to identify unusually frequent transaction activity that may require further investigation. It does not independently determine whether a transaction is fraudulent.
+
+## Rule Validation
+
+The rule was validated across the 1,000,000 transaction dataset.
+
+- Flagged transactions: 2,266
+- Non-flagged transactions: 997,734
+- Flag rate: 0.23%
+
+The low flag rate indicates that the rule is selective and identifies relatively uncommon high-frequency transaction patterns.
+
 This validation is important because it shows the coverage of each detection rule. The high-value rule identifies a broader set of transactions, while the high-velocity rule is more selective and identifies relatively uncommon transaction-frequency patterns.
