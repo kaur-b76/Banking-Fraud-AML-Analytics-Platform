@@ -898,3 +898,41 @@ FROM transactions
 GROUP BY "Rule_High_Value";
 
 ![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-07%20at%2018.07.01.png)
+
+### High Velocity Transaction Rule
+
+Implemented the Rule_High_Velocity detection logic using a rolling 24-hour transaction window.
+
+Transactions are flagged as Yes when a customer performs 5 or more transactions within a 24-hour period. The rule helps identify unusually high transaction frequency that may indicate suspicious activity.
+
+Validation confirmed that multiple customer transactions were successfully flagged by the rule.
+
+### Transaction Type Frequency Analysis
+
+Analyzed transaction frequency by customer and transaction type using `Customer_ID` and `Transaction_Type`.
+
+The analysis covered five transaction categories:
+
+* Bill Payment
+* Deposit
+* Purchase
+* Transfer
+* Withdrawal
+  
+SELECT
+    "Customer_ID",
+    "Transaction_Type",
+    COUNT(*) AS transaction_count
+FROM transactions
+GROUP BY
+    "Customer_ID",
+    "Transaction_Type"
+ORDER BY
+    "Customer_ID",
+    "Transaction_Type";
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-07%20at%2023.44.53.png)
+
+Transaction counts varied across customers and transaction types. For example, Customer 1 recorded 12 Bill Payments, 24 Deposits, 27 Purchases, 21 Transfers, and 13 Withdrawals.
+
+The analysis provides a behavioral baseline for each customer and transaction type. The results will be used to determine whether transaction frequency can support additional AML detection rules.
