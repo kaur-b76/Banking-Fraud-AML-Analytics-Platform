@@ -968,6 +968,13 @@ The existing High Value Transaction Rule is therefore retained as the primary am
 
 Validated the outputs of the implemented AML detection rules by counting flagged and non-flagged transactions.
 
+SELECT
+    COUNT(*) FILTER (WHERE "Rule_High_Value" = 'Yes') AS high_value_yes,
+    COUNT(*) FILTER (WHERE "Rule_High_Value" = 'No') AS high_value_no,
+    COUNT(*) FILTER (WHERE "Rule_High_Velocity" = 'Yes') AS high_velocity_yes,
+    COUNT(*) FILTER (WHERE "Rule_High_Velocity" = 'No') AS high_velocity_no
+FROM transactions;
+
 ![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.21.14.png)
 
 **High Value Rule:** Identifies transactions that meet the defined high-value transaction threshold. It flagged 125,046 transactions, representing 12.50% of the dataset.
