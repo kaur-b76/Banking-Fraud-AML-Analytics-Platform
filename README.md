@@ -1006,3 +1006,34 @@ The rule was validated across the 1,000,000 transaction dataset.
 The low flag rate indicates that the rule is selective and identifies relatively uncommon high-frequency transaction patterns.
 
 This validation is important because it shows the coverage of each detection rule. The high-value rule identifies a broader set of transactions, while the high-velocity rule is more selective and identifies relatively uncommon transaction-frequency patterns.
+
+### AML Rule Overlap Analysis
+
+Analyzed the overlap between the `Rule_High_Value` and `Rule_High_Velocity` detection rules to understand how the two rules behave together.
+
+SELECT
+    CASE
+        WHEN "Rule_High_Value" = 'Yes'
+         AND "Rule_High_Velocity" = 'Yes'
+            THEN 'Both Rules'
+        WHEN "Rule_High_Value" = 'Yes'
+            THEN 'High Value Only'
+        WHEN "Rule_High_Velocity" = 'Yes'
+            THEN 'High Velocity Only'
+        ELSE 'No Rule Triggered'
+    END AS rule_result,
+    COUNT(*) AS transaction_count
+FROM transactions
+GROUP BY rule_result
+ORDER BY transaction_count DESC;
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.56.16.png)
+
+Transactions were categorized into four groups:
+
+- **High Value Only** - flagged by the High Value rule but not the High Velocity rule.
+- **High Velocity Only** - flagged by the High Velocity rule but not the High Value rule.
+- **Both Rules** - flagged by both detection rules.
+- **No Rule Triggered** - did not meet either detection criterion.
+
+This analysis is important because it shows whether the two AML rules identify the same transactions or capture different suspicious patterns. It also helps evaluate whether the rules provide complementary coverage of transaction risk.
