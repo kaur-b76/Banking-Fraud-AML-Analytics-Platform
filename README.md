@@ -1,605 +1,261 @@
-# Banking-Fraud-AML-Analytics-Platform
-
-# Banking Fraud & AML Transaction Monitoring Analytics Platform
+# Banking Fraud & AML Analytics Platform
 
 ## Project Overview
 
-Banks and financial institutions process large volumes of transactions every day. Identifying potentially fraudulent activity, monitoring suspicious transactions, prioritizing high-risk alerts, and supporting Anti-Money Laundering (AML) investigations are important responsibilities for fraud, risk, compliance, and financial crime teams.
+Banks process large volumes of transactions that must be monitored for fraud, suspicious activity, customer risk, and potential AML concerns.
 
-The objective of this project is to develop an end-to-end **Banking Fraud and AML Transaction Monitoring Analytics Platform** using Python, SQL Server, and Power BI.
+This project builds an end-to-end **Banking Fraud & AML Transaction Monitoring Analytics Platform** using **Python, PostgreSQL, SQL, and Metabase**.
 
-The project simulates a banking transaction monitoring environment using synthetic customer, account, and transaction data. The generated datasets include fraud indicators, AML alerts, customer risk levels, transaction risk scores, Politically Exposed Person (PEP) indicators, sanctions indicators, transaction velocity flags, potential structuring patterns, fraud losses, and investigation statuses.
+The project uses synthetic customer, account, and transaction data to simulate a banking environment containing fraud indicators, AML flags, customer risk levels, transaction risk scores, PEP and sanctions indicators, velocity and structuring flags, fraud losses, and investigation statuses.
 
-The project demonstrates how banking transaction data can be generated, stored, validated, analyzed, and visualized to support data-driven fraud and AML monitoring.
+The workflow covers:
+
+**Data Generation → PostgreSQL → SQL Analysis → Fraud & AML Rules → Metabase Dashboard → Business Insights**
 
 ---
 
 ## Business Problem
 
-Financial institutions need to analyze large volumes of transaction data to identify suspicious activities and potential financial crime risks.
+Fraud and AML teams need to quickly identify suspicious activity and understand where financial risk is concentrated.
 
-Fraud and AML teams need to answer questions such as:
+This project addresses questions such as:
 
-- What is the overall fraud rate?
-- How much money has been lost due to fraudulent transactions?
-- Which transaction types and payment methods have the highest fraud exposure?
-- Which customers generate the highest number of suspicious transactions?
-- Which countries and geographic locations generate the most AML alerts?
-- Are high-risk customers associated with greater fraud losses?
-- Which transactions demonstrate unusual transaction velocity?
-- Which customers demonstrate potential structuring activity?
-- How many fraud and AML investigation cases are currently open, under review, escalated, or closed?
-- Which high-risk transactions should investigators prioritize?
-
-The purpose of this project is to build an analytics solution that helps answer these questions using SQL-based analysis and interactive Power BI dashboards.
+- What is the overall fraud rate and financial loss?
+- Which customers, channels, payment methods, and regions have higher fraud exposure?
+- Are high-risk customers associated with greater fraud activity?
+- Which transactions show unusual velocity or high-value behavior?
+- How are fraud patterns changing over time?
+- Which fraud types occur most frequently?
+- Which AML rules generate the most alerts?
+- Where do multiple risk rules overlap?
 
 ---
 
 ## Project Objectives
 
-The primary objectives of this project are to:
-
 - Generate realistic synthetic banking data using Python.
-- Simulate customer, account, transaction, fraud, and AML-related attributes.
-- Store and manage large transaction datasets using SQL Server.
-- Perform data validation and data quality checks.
+- Build relational customer, account, and transaction datasets.
+- Store and validate 1M transactions in PostgreSQL.
 - Analyze fraud and AML patterns using SQL.
-- Apply SQL concepts including JOINs, CTEs, CASE statements, subqueries, window functions, aggregations, and views.
-- Identify high-risk customers and suspicious transaction patterns.
-- Analyze fraud losses across multiple business dimensions.
-- Monitor AML alerts and investigation cases.
-- Develop interactive Power BI dashboards for fraud, AML, customer risk, and investigation monitoring.
-- Translate complex transaction data into actionable business insights.
+- Apply JOINs, CTEs, CASE statements, subqueries, window functions, aggregations, and views.
+- Develop rule-based fraud and AML detection logic.
+- Analyze fraud losses across business dimensions.
+- Build an interactive Metabase dashboard.
+- Translate transaction data into actionable fraud and AML insights.
 
 ---
 
-# Technology Stack
+## Technology Stack
 
-| Technology       | Purpose                              | Version        |
-| ---------------- | ------------------------------------ | -------------- |
-| Python           | Synthetic banking dataset generation | 3.x            |
-| Pandas           | Data manipulation                    | Latest         |
-| NumPy            | Synthetic data generation            | Latest         |
-| Faker            | Customer data generation             | Latest         |
-| Jupyter Notebook | Dataset generation                   | Latest         |
-| PostgreSQL       | Relational database                  | **18**         |
-| pgAdmin 4        | PostgreSQL administration            | **Latest**     |
-| SQL              | Fraud & AML analysis                 | PostgreSQL SQL |
-| Power BI         | Dashboard development                | Desktop        |
-| GitHub           | Version control & documentation      | Latest         |
+| Technology | Purpose |
+|---|---|
+| Python 3.x | Synthetic data generation |
+| Pandas | Data manipulation |
+| NumPy | Data generation |
+| Faker | Synthetic customer data |
+| Jupyter Notebook | Dataset generation |
+| PostgreSQL 18 | Data storage and analysis |
+| pgAdmin 4 | Database administration |
+| SQL | Fraud, AML, and risk analysis |
+| Metabase | BI dashboard and visualization |
+| GitHub | Version control and documentation |
 
+---
 
-# Project Workflow
+## Project Workflow
 
-The project follows an end-to-end analytics workflow:
-
+```text
 Python Synthetic Data Generation
-
-↓
-
+              ↓
 CSV Dataset Export
-
-↓
-
-SQL Server Database
-
-↓
-
-Data Validation and Quality Checks
-
-↓
-
+              ↓
+PostgreSQL Database
+              ↓
+Data Validation
+              ↓
 SQL Fraud & AML Analysis
-
-↓
-
-SQL Views and Analytical Queries
-
-↓
-
-Power BI Data Model
-
-↓
-
-Interactive Fraud & AML Dashboards
-
-↓
-
-Business Insights and Recommendations
+              ↓
+Rule-Based Fraud & AML Detection
+              ↓
+Metabase Dashboard
+              ↓
+Business Insights
+```
 
 ---
 
 # Dataset Overview
 
-The project uses three primary synthetic datasets:
+The project uses three synthetic datasets:
 
-1. Customers Dataset
-2. Accounts Dataset
-3. Transactions Dataset
-
-The datasets were generated using Python rather than downloaded from an existing public dataset.
-
-This approach was selected to create a customized banking analytics environment containing specific fraud, AML, risk, and investigation attributes required for the project.
-
-The generated data is entirely synthetic and does not contain real customer, financial, or personally identifiable information.
-
----
-
-# Why Synthetic Data Was Created
-
-Public fraud datasets are useful for machine learning and statistical analysis; however, many publicly available datasets have limitations for end-to-end banking analytics projects.
-
-For example, public datasets may:
-
-- Contain anonymized column names.
-- Lack customer-level information.
-- Lack account information.
-- Exclude AML-related attributes.
-- Exclude PEP and sanctions indicators.
-- Exclude transaction risk scores.
-- Exclude investigation workflows.
-- Exclude fraud loss information.
-- Lack transaction monitoring indicators.
-
-To address these limitations, synthetic banking datasets were generated specifically for this project.
-
-The synthetic datasets allow the project to simulate relationships between:
-
-- Customers
-- Bank accounts
-- Transactions
-- Customer risk
-- Fraud alerts
-- AML alerts
-- Transaction monitoring indicators
-- Investigation cases
-
-This provides a more complete environment for practicing SQL analysis, data modeling, and Power BI dashboard development.
-
----
-
-# Dataset Size
-
-| Dataset | Approximate Records | Description |
+| Dataset | Records | Purpose |
 |---|---:|---|
-| Customers | 10,000 | Synthetic banking customer profiles |
-| Accounts | 10,000 | Customer bank account information |
-| Transactions | 1,000,000 | Synthetic banking transaction records |
+| Customers | 10,000 | Customer, geographic, financial, and risk information |
+| Accounts | 10,000 | Account information and status |
+| Transactions | 1,000,000 | Transaction, fraud, AML, risk, and monitoring data |
 
-The large transaction dataset was generated to simulate a higher-volume banking analytics environment and provide sufficient data for SQL querying, aggregation, trend analysis, and dashboard development.
+The datasets were generated specifically for this project rather than downloaded from a public dataset. This allowed the project to include customer-level, account-level, fraud, AML, investigation, and monitoring attributes in one relational environment.
+
+All data is synthetic and contains no real customer or banking information.
 
 ---
 
-# Dataset Relationships
+## Dataset Relationships
 
-The datasets follow a relational structure.
-
+```text
 Customers
-
-Customer_ID
-
-↓
-
+   │
+   │ Customer_ID
+   ↓
 Accounts
-
-Customer_ID / Account_ID
-
-↓
-
+   │
+   │ Customer_ID / Account_ID
+   ↓
 Transactions
+```
 
-Customer_ID / Account_ID
-
-The primary relationships are:
-
-- One customer is associated with an account.
-- Each account belongs to a customer.
-- Customers and accounts can be associated with multiple transactions.
-
-These relationships allow customer information, account information, and transaction activity to be combined using SQL JOIN operations and Power BI relationships.
+The relationships allow customer, account, and transaction information to be combined using SQL JOINs.
 
 ---
 
-# 1. Customers Dataset
+# Customers Dataset
 
-## Description
-
-The `customers.csv` dataset contains synthetic demographic, financial, geographic, and customer risk information.
-
-The purpose of this dataset is to support customer segmentation, customer risk analysis, KYC-related analysis, and fraud and AML investigations.
-
-## Customer Dataset Columns
+`customers.csv` contains synthetic demographic, financial, geographic, and risk information.
 
 | Column | Description |
 |---|---|
-| Customer_ID | Unique identifier assigned to each customer |
-| First_Name | Synthetic customer first name |
-| Last_Name | Synthetic customer last name |
+| Customer_ID | Unique customer identifier |
+| First_Name | Synthetic first name |
+| Last_Name | Synthetic last name |
 | Age | Customer age |
 | Gender | Customer gender |
-| Occupation | Synthetic customer occupation |
-| Province | Canadian province associated with the customer |
+| Occupation | Synthetic occupation |
+| Province | Canadian province |
 | City | Customer city |
-| Income | Estimated synthetic annual customer income |
-| Credit_Score | Synthetic customer credit score |
-| Risk_Level | Customer risk classification: Low, Medium, or High |
-| PEP_Flag | Indicates whether the customer is synthetically classified as a Politically Exposed Person |
-| Sanctions_Flag | Indicates a synthetic potential sanctions screening indicator |
-| Customer_Segment | Customer classification such as Retail, Business, Premium, or Student |
-| Account_Open_Date | Synthetic date when the customer relationship was established |
+| Income | Synthetic annual income |
+| Credit_Score | Synthetic credit score |
+| Risk_Level | Low, Medium, or High |
+| PEP_Flag | Synthetic PEP indicator |
+| Sanctions_Flag | Synthetic sanctions indicator |
+| Customer_Segment | Retail, Business, Premium, or Student |
+| Account_Open_Date | Synthetic account opening date |
+
+Customer risk classifications are simplified for portfolio purposes and do not represent production banking risk methodologies.
 
 ---
 
-## Customer Risk Classification
+# Accounts Dataset
 
-Customers were assigned risk classifications based primarily on synthetic credit score ranges.
-
-Example classifications include:
-
-- Low Risk
-- Medium Risk
-- High Risk
-
-Additional customer attributes, including PEP and sanctions indicators, were generated to support AML and financial crime analysis.
-
-These classifications are simplified for portfolio and educational purposes and do not represent the complete customer risk assessment methodologies used by actual financial institutions.
-
----
-
-# 2. Accounts Dataset
-
-## Description
-
-The `accounts.csv` dataset contains synthetic banking account information associated with customers.
-
-The dataset provides the connection between customer profiles and banking transaction activity.
-
-## Accounts Dataset Columns
+`accounts.csv` connects customer profiles with banking activity.
 
 | Column | Description |
 |---|---|
-| Account_ID | Unique identifier assigned to each bank account |
-| Customer_ID | Customer associated with the account |
-| Account_Type | Type of banking account |
+| Account_ID | Unique account identifier |
+| Customer_ID | Associated customer |
+| Account_Type | Savings, Chequing, or Credit Card |
 | Balance | Synthetic account balance |
-| Branch | Banking branch associated with the account |
-| Status | Current synthetic account status |
+| Branch | Associated branch |
+| Status | Account status |
 
 ---
 
-## Account Types
+# Transactions Dataset
 
-The generated dataset contains account types such as:
+`transactions.csv` contains approximately one million synthetic banking transactions and is the primary dataset for fraud and AML analysis.
 
-- Savings
-- Chequing
-- Credit Card
-
-Account information can be combined with customer and transaction data to analyze transaction activity across different account types and customer risk categories.
-
----
-
-# 3. Transactions Dataset
-
-## Description
-
-The `transactions.csv` dataset is the primary dataset used for fraud and AML analysis.
-
-It contains approximately one million synthetic banking transactions.
-
-Each transaction contains information about:
-
-- Customer
-- Account
-- Transaction amount
-- Transaction date and time
-- Merchant
-- Payment method
-- Geographic location
-- Device information
-- Transaction channel
-- Customer risk
-- Fraud indicators
-- AML indicators
-- Transaction monitoring alerts
-- Investigation status
-- Fraud losses
-
-This dataset is designed to support SQL analysis and Power BI dashboard development.
-
----
-
-# Transactions Dataset Columns
-
-## Transaction Identification
+### Transaction Information
 
 | Column | Description |
 |---|---|
-| Transaction_ID | Unique identifier assigned to each transaction |
-| Customer_ID | Customer associated with the transaction |
-| Account_ID | Account associated with the transaction |
+| Transaction_ID | Unique transaction identifier |
+| Customer_ID | Associated customer |
+| Account_ID | Associated account |
+| Transaction_Date | Transaction date |
+| Transaction_Time | Transaction time |
+| Transaction_Timestamp | Combined date and time |
+| Transaction_Hour | Hour of transaction |
+| Amount | Transaction value |
+| Merchant | Synthetic merchant |
+| Merchant_Category | Merchant category |
+| Transaction_Type | Purchase, Withdrawal, Deposit, Transfer, or Bill Payment |
+| Payment_Method | Credit Card, Debit Card, Wire Transfer, E-Transfer, or Mobile Banking |
 
----
-
-## Transaction Date and Time
-
-| Column | Description |
-|---|---|
-| Transaction_Date | Date when the transaction occurred |
-| Transaction_Time | Time when the transaction occurred |
-| Transaction_Timestamp | Combined transaction date and time |
-| Transaction_Hour | Hour during which the transaction occurred |
-
-Transaction date and time information supports:
-
-- Monthly trend analysis
-- Daily transaction analysis
-- Time-based fraud analysis
-- Transaction velocity monitoring
-
----
-
-## Transaction Information
+### Geographic & Device Information
 
 | Column | Description |
 |---|---|
-| Amount | Monetary value of the transaction |
-| Merchant | Synthetic merchant associated with the transaction |
-| Merchant_Category | Business category associated with the merchant |
-| Transaction_Type | Type of banking transaction |
-| Payment_Method | Method used to complete the transaction |
+| Country | Transaction country |
+| Province | Transaction province |
+| City | Transaction city |
+| Is_International | International transaction indicator |
+| IPAddress | Synthetic IP address |
+| Device_ID | Synthetic device identifier |
+| Device_Type | Device category |
+| Browser | Browser used |
+| Operating_System | Operating system |
+| Channel | ATM, Mobile, Online, Branch, or POS |
 
-Example transaction types include:
-
-- Purchase
-- Withdrawal
-- Deposit
-- Transfer
-- Bill Payment
-
-Example payment methods include:
-
-- Credit Card
-- Debit Card
-- Wire Transfer
-- E-Transfer
-- Mobile Banking
-
----
-
-## Geographic Information
+### Risk & Compliance Indicators
 
 | Column | Description |
 |---|---|
-| Country | Country where the synthetic transaction occurred |
-| Province | Canadian province associated with the transaction |
-| City | City associated with the transaction |
-| Is_International | Indicates whether the transaction occurred outside Canada |
-
-Geographic attributes support:
-
-- Domestic versus international transaction analysis
-- Fraud analysis by location
-- AML alerts by country
-- Geographic risk analysis
-
----
-
-## Device and Technology Information
-
-| Column | Description |
-|---|---|
-| IPAddress | Synthetic IP address associated with the transaction |
-| Device_ID | Synthetic identifier for the device used |
-| Device_Type | Type of device used to complete the transaction |
-| Browser | Browser associated with the transaction |
-| Operating_System | Operating system associated with the transaction |
-| Channel | Banking channel used for the transaction |
-
-Example banking channels include:
-
-- ATM
-- Mobile
-- Online
-- Branch
-- POS
-
-These attributes provide opportunities to analyze fraud patterns across devices and banking channels.
-
----
-
-## Currency and International Activity
-
-| Column | Description |
-|---|---|
-| Currency | Currency associated with the transaction |
-| Is_International | Identifies domestic and international transactions |
-
-International transaction information is used to support geographic fraud and AML analysis.
-
----
-
-# Customer Risk & Compliance Indicators
-
-| Column | Description |
-|---|---|
-| Customer_Risk_Level | Risk classification associated with the customer |
-| PEP_Flag | Synthetic Politically Exposed Person indicator |
-| Sanctions_Flag | Synthetic sanctions screening indicator |
-
-These columns allow transactions to be analyzed in combination with customer-level compliance and risk indicators.
-
----
-
-# Transaction Monitoring Indicators
-
-| Column | Description |
-|---|---|
-| Velocity_Flag | Indicates potentially unusual transaction frequency |
-| Structuring_Flag | Indicates potential transaction structuring activity |
+| Customer_Risk_Level | Customer risk classification |
+| PEP_Flag | Synthetic PEP indicator |
+| Sanctions_Flag | Synthetic sanctions indicator |
 | Risk_Score | Synthetic transaction risk score |
-| Alert_Level | Transaction alert classification |
-| Alert_Reason | Explanation of factors contributing to the transaction alert |
+| Alert_Level | Alert classification |
+| Alert_Reason | Reason for alert |
+| Velocity_Flag | Unusual transaction-frequency indicator |
+| Structuring_Flag | Potential structuring indicator |
 
----
-
-## Transaction Risk Score
-
-A synthetic transaction risk scoring methodology was developed to classify transactions according to multiple risk indicators.
-
-Example risk factors include:
-
-- High transaction value
-- International transaction activity
-- Wire transfers
-- Higher-risk customer classification
-- PEP indicators
-- Sanctions indicators
-- Unusual transaction times
-- Selected geographic indicators
-- Transaction velocity
-- Potential structuring activity
-
-Transactions receive a synthetic risk score based on these indicators.
-
-The risk score is then used to classify transactions into categories such as:
-
-- Low
-- Medium
-- High
-- Critical
-
-The scoring methodology was developed for educational and portfolio purposes and does not represent a proprietary or production risk model used by an actual financial institution.
-
----
-
-# Fraud Indicators
+### Fraud Indicators
 
 | Column | Description |
 |---|---|
-| Fraud_Alert | Indicates whether the transaction generated a synthetic fraud alert |
-| Is_Fraud | Synthetic confirmed fraud classification |
-| Fraud_Type | Category of fraudulent activity |
-| Fraud_Loss_Amount | Estimated financial loss associated with confirmed fraudulent activity |
-| Chargeback | Indicates whether the transaction resulted in a synthetic chargeback |
+| Fraud_Alert | Synthetic fraud alert |
+| Is_Fraud | Confirmed fraud classification |
+| Fraud_Type | Fraud category |
+| Fraud_Loss_Amount | Estimated fraud loss |
+| Chargeback | Synthetic chargeback indicator |
 
-Example fraud types include:
+Fraud types include Card Not Present, Identity Theft, Account Takeover, Phishing, Friendly Fraud, Synthetic Identity, and Merchant Fraud.
 
-- Card Not Present
-- Identity Theft
-- Account Takeover
-- Phishing
-- Friendly Fraud
-- Synthetic Identity
-- Merchant Fraud
-
----
-
-# AML Indicators
+### AML & Investigation Indicators
 
 | Column | Description |
 |---|---|
-| AML_Flag | Indicates whether the transaction generated a synthetic AML monitoring alert |
-| PEP_Flag | Synthetic Politically Exposed Person indicator |
-| Sanctions_Flag | Synthetic sanctions screening indicator |
-| Structuring_Flag | Indicates potential transaction structuring activity |
-| Velocity_Flag | Indicates potentially unusual transaction frequency |
-
-These attributes support analysis of suspicious transaction activity and customer risk.
+| AML_Flag | Synthetic AML alert |
+| Case_ID | Investigation case identifier |
+| Investigation_Status | Open, Under Review, Escalated, Closed, or Not Required |
 
 ---
-
-# Investigation Information
-
-| Column | Description |
-|---|---|
-| Case_ID | Synthetic investigation case identifier |
-| Investigation_Status | Current status of the synthetic investigation |
-| Alert_Reason | Description of factors contributing to the alert |
-
-Example investigation statuses include:
-
-- Open
-- Under Review
-- Escalated
-- Closed
-- Not Required
-
-Investigation information supports the development of operational dashboards for fraud and AML case monitoring.
-
----
-
-# Important Data Disclaimer
-
-All datasets used in this project are entirely synthetic and were generated using Python.
-
-The project does not contain:
-
-- Real customer information
-- Real banking transactions
-- Real account information
-- Real fraud investigation information
-- Real PEP information
-- Real sanctions screening results
-
-The fraud, AML, PEP, sanctions, structuring, velocity, risk score, and investigation indicators were created solely for educational, analytical, and portfolio demonstration purposes.
-
-The rules and risk-scoring methodologies used in this project are simplified simulations and should not be interpreted as actual financial institution monitoring systems, regulatory requirements, or production fraud detection methodologies.
-
----
-
-# Expected Project Outcomes
-
-By completing this project, the goal is to develop an analytics solution capable of:
-
-- Monitoring fraud performance.
-- Measuring fraud rates and financial losses.
-- Identifying fraud trends.
-- Analyzing high-risk customers.
-- Monitoring AML alerts.
-- Analyzing transaction monitoring indicators.
-- Prioritizing high-risk cases.
-- Tracking investigation statuses.
-- Providing management-level fraud and AML reporting.
-- Supporting data-driven decision-making through interactive dashboards.
-
----
-
-# Synthetic Dataset Generation
-- Generated 10,000 synthetic customers.
-- Generated 10,000 bank accounts.
-- Generated 1,000,000 banking transactions.
-- Exported all datasets as CSV files.
 
 # PostgreSQL Database Setup
-# Software Used
-- PostgreSQL 18
-- pgAdmin 4
 
-# Database Created - banking_aml
-Tables Created
-- Customers
-- Accounts
-- Transactions
+## Database
 
-# Data Imported
-| Table        |   Records |
-| ------------ | --------: |
-| Customers    |    10,000 |
-| Accounts     |    10,000 |
-| Transactions | 1,000,000 |
+**Database:** `banking_aml`
 
-# Data Validation
-**Total Transactions**
+**Tables:**
 
-SELECT COUNT(*) AS "Total Transactions" FROM Transactions;
+- `Customers`
+- `Accounts`
+- `Transactions`
+
+### Data Validation
+
+```sql
+SELECT COUNT(*) AS "Total Transactions"
+FROM Transactions;
+```
 
 ![PostgreSQL Tables](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-19%20at%2022.46.12.png)
 
-Imported 1,000,000 transaction records into PostgreSQL 18 without data loss. 
+1,000,000 transaction records were imported into PostgreSQL.
 
-**Transaction Summary**
+### Transaction Summary
 
+```sql
 SELECT
     COUNT(*) AS "Total Transactions",
     SUM("Amount") AS "Total Transaction Amount",
@@ -607,13 +263,19 @@ SELECT
     MIN("Amount") AS "Minimum Transaction",
     MAX("Amount") AS "Maximum Transaction"
 FROM Transactions;
+```
 
 ![Transaction Summary](https://raw.githubusercontent.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/main/Screenshot%202026-07-19%20at%2023.24.56.png)
 
-The transaction dataset contains 1,000,000 synthetic banking transactions with a total transaction value exceeding $4.0 billion. The average transaction amount is approximately $4,002, providing a realistic, high-volume dataset for fraud analytics and transaction monitoring.
+The dataset contains 1M transactions with total transaction value exceeding $4B and an average transaction amount of approximately $4,002.
 
-**Fraud Rate Analysis**
+---
 
+# SQL Fraud Analysis
+
+## Fraud Rate
+
+```sql
 SELECT
     "Is_Fraud",
     COUNT(*) AS "Total Transactions",
@@ -625,13 +287,17 @@ SELECT
 FROM Transactions
 GROUP BY "Is_Fraud"
 ORDER BY "Total Transactions" DESC;
+```
 
 ![Fraud Rate Analysis](https://raw.githubusercontent.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/main/Screenshot%202026-07-19%20at%2023.26.33.png)
 
-Out of 1,000,000 transactions, 25,334 were classified as fraudulent, resulting in a fraud rate of approximately 2.53%. This dataset provides a balanced environment for fraud detection and investigative analytics.
+**Result:** 25,334 of 1,000,000 transactions were classified as fraudulent, producing a **2.53% fraud rate**.
 
-**Fraud Type Distribution**
+---
 
+## Fraud Type Distribution
+
+```sql
 SELECT
     "Fraud_Type",
     COUNT(*) AS "Fraud Count",
@@ -640,36 +306,38 @@ FROM Transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY "Fraud_Type"
 ORDER BY "Fraud Count" DESC;
+```
 
 ![Fraud Type Distribution](https://raw.githubusercontent.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/main/Screenshot%202026-07-20%20at%2000.17.41.png)
 
-Fraud incidents are distributed across multiple fraud categories including Friendly Fraud, Synthetic Identity, Card Not Present, Identity Theft, Account Takeover, Phishing, and Merchant Fraud. Understanding these patterns helps prioritize fraud prevention strategies.
+This identifies the most common fraud categories and their associated transaction value.
 
-**Fraud by Customer Risk Level**
+---
 
+## Fraud by Customer Risk Level
+
+```sql
 SELECT
     c."Risk_Level",
     COUNT(t."Transaction_ID") AS "Fraud Transactions",
     ROUND(SUM(t."Amount"),2) AS "Fraud Amount"
 FROM Customers c
 JOIN Transactions t
-ON c."Customer_ID" = t."Customer_ID"
+    ON c."Customer_ID" = t."Customer_ID"
 WHERE t."Is_Fraud"='Yes'
 GROUP BY c."Risk_Level"
 ORDER BY "Fraud Amount" DESC;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.19.37.png)
+![Fraud by Customer Risk Level](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.19.37.png)
 
-Description
+Compares fraud volume and financial exposure across High, Medium, and Low risk customers.
 
-This query analyzes fraudulent transactions by customer risk level. It joins the Customers and Transactions tables using the Customer_ID field, filters only fraudulent transactions, and groups the results by customer risk category. The output shows the total number of fraudulent transactions and the total fraud amount associated with each risk level.
+---
 
-Business Insight
+## Top 10 Customers by Fraud Amount
 
-Comparing fraud activity across High, Medium, and Low risk customers helps financial institutions determine whether fraud is concentrated within specific customer segments. These insights support risk-based monitoring, fraud investigations, and compliance with Anti-Money Laundering (AML) programs.
-
-**Top 10 Customers by Fraud Amount**
-
+```sql
 SELECT
     c."Customer_ID",
     c."First_Name",
@@ -679,7 +347,7 @@ SELECT
     ROUND(SUM(t."Amount"),2) AS "Total Fraud Amount"
 FROM Customers c
 JOIN Transactions t
-ON c."Customer_ID" = t."Customer_ID"
+    ON c."Customer_ID" = t."Customer_ID"
 WHERE t."Is_Fraud"='Yes'
 GROUP BY
     c."Customer_ID",
@@ -688,19 +356,17 @@ GROUP BY
     c."Risk_Level"
 ORDER BY "Total Fraud Amount" DESC
 LIMIT 10;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.24.49.png)
+![Top 10 Customers by Fraud Amount](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.24.49.png)
 
-Description
+Identifies customers associated with the highest total fraudulent transaction amounts, supporting investigation prioritization.
 
-This query identifies the top 10 customers with the highest total fraudulent transaction amounts. It joins the Customers and Transactions tables, filters only fraudulent transactions, aggregates the fraud amount and transaction count for each customer, and ranks them in descending order of total fraud value.
+---
 
-Business Insight
+## Fraud by Province
 
-Identifying customers responsible for the highest fraud losses enables fraud analysts to prioritize investigations and allocate resources more effectively. Customers with repeated or high-value fraudulent transactions may require enhanced due diligence, account monitoring, or regulatory review as part of fraud prevention and AML programs.
-
-**Fraud by Province**
-
+```sql
 SELECT
     "Province",
     COUNT(*) AS "Fraud Transactions",
@@ -709,19 +375,17 @@ FROM Transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY "Province"
 ORDER BY "Total Fraud Amount" DESC;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.28.15.png)
+![Fraud by Province](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.28.15.png)
 
-Description
+Identifies geographic concentrations of fraudulent activity and financial loss.
 
-This query analyzes fraudulent transactions by Canadian province. It filters only fraudulent transactions, groups the data by province, and calculates both the total number of fraudulent transactions and the total fraud amount for each province. The results are sorted in descending order of fraud amount to identify regions with the highest financial losses.
+---
 
-Business Insight
+## Fraud by Payment Method
 
-Geographic analysis helps financial institutions identify fraud hotspots and regional trends. Provinces with higher fraud volumes or losses may require enhanced monitoring, additional fraud prevention measures, or targeted investigations to reduce financial risk.
-
-**Fraud by Payment Method**
-
+```sql
 SELECT
     "Payment_Method",
     COUNT(*) AS "Fraud Transactions",
@@ -730,19 +394,17 @@ FROM Transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY "Payment_Method"
 ORDER BY "Total Fraud Amount" DESC;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.32.26.png)
+![Fraud by Payment Method](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.32.26.png)
 
-Description
+Shows which payment methods have the greatest fraud volume and financial impact.
 
-This query examines fraudulent transactions by payment method. It filters fraudulent transactions, groups them by payment method, and calculates both the number of fraudulent transactions and the total fraud amount associated with each payment type. The results are sorted by total fraud amount to highlight the payment methods with the highest financial impact.
+---
 
-Business Insight
+## Fraud by Merchant Category
 
-Understanding which payment methods are most frequently associated with fraud enables financial institutions to strengthen transaction monitoring and implement targeted fraud prevention controls. Payment methods with higher fraud losses may require additional authentication, risk scoring, or real-time monitoring.
-
-**Fraud by Merchant Category**
-
+```sql
 SELECT
     "Merchant_Category",
     COUNT(*) AS "Fraud Transactions",
@@ -751,19 +413,17 @@ FROM Transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY "Merchant_Category"
 ORDER BY "Total Fraud Amount" DESC;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.35.46.png)
+![Fraud by Merchant Category](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.35.46.png)
 
-Description
+Highlights merchant categories associated with higher fraud losses.
 
-This query analyzes fraudulent transactions across different merchant categories. It filters only fraudulent transactions, groups them by merchant category, and calculates both the total number of fraudulent transactions and the total fraud amount for each category. The results are ranked by total fraud amount to identify industries with the greatest financial losses.
+---
 
-Business Insight
+## Monthly Fraud Trend
 
-Merchant category analysis helps financial institutions identify industries that are more susceptible to fraudulent activity. These insights support risk-based transaction monitoring, fraud prevention strategies, and merchant-specific controls to reduce financial losses.
-
-**Monthly Fraud Trend**
-
+```sql
 SELECT
     DATE_TRUNC('month', "Transaction_Date") AS "Month",
     COUNT(*) AS "Fraud Transactions",
@@ -772,19 +432,17 @@ FROM Transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY DATE_TRUNC('month', "Transaction_Date")
 ORDER BY "Month";
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.38.04.png)
+![Monthly Fraud Trend](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-20%20at%2000.38.04.png)
 
-Description
+Tracks fraud volume and financial impact over time.
 
-This query analyzes fraudulent transactions over time by grouping them into monthly periods. It filters only fraudulent transactions and calculates both the number of fraud cases and the total fraud amount for each month. The results are displayed chronologically to identify trends and seasonal patterns in fraudulent activity.
+---
 
-Business Insight
+## Time-of-Day Fraud Analysis
 
-Monitoring fraud trends over time helps financial institutions identify periods of increased fraud activity and evaluate the effectiveness of fraud prevention strategies. A sudden increase in fraud volume may indicate emerging fraud schemes or operational risks that require immediate investigation.
-
-**Time-of-Day Fraud Analysis**
-
+```sql
 SELECT
     EXTRACT(HOUR FROM "Transaction_Timestamp") AS "Hour of Day",
     COUNT(*) AS "Fraud Transactions",
@@ -793,41 +451,38 @@ FROM transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY EXTRACT(HOUR FROM "Transaction_Timestamp")
 ORDER BY "Hour of Day";
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2018.47.54.png)
+![Time-of-Day Fraud Analysis](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2018.47.54.png)
 
-Description
+The dataset shows higher fraudulent activity during late-night and early-morning periods, providing a basis for time-based monitoring rules.
 
-This query analyzes fraudulent transactions based on the hour in which they occurred. It extracts the hour from the transaction timestamp, filters only fraudulent transactions, and calculates the total number of fraudulent transactions along with the total fraud amount for each hour of the day. The results are sorted chronologically to identify peak hours of fraudulent activity.
+---
 
-Business Insight
+## Fraud by Day of Week
 
-Analyzing fraud by hour of day helps financial institutions identify time periods with elevated fraud risk. In this dataset, fraudulent transactions are significantly higher during the late-night and early-morning hours (approximately 12:00 AM–4:00 AM), with another noticeable increase around 11:00 PM. These patterns may indicate that fraudsters prefer to perform unauthorized transactions during off-peak hours when customer activity and operational monitoring are generally lower. Such insights enable banks to strengthen real-time fraud detection rules, schedule additional monitoring during high-risk periods, and implement enhanced authentication or transaction verification for suspicious activities occurring outside normal business hours.
-
-**Fraud by Day of Week**
-
+```sql
 SELECT
     TRIM(TO_CHAR("Transaction_Date", 'Day')) AS "Day of Week",
     COUNT(*) AS "Fraud Transactions",
     ROUND(SUM("Amount"), 2) AS "Total Fraud Amount"
 FROM transactions
 WHERE "Is_Fraud" = 'Yes'
-GROUP BY TRIM(TO_CHAR("Transaction_Date", 'Day')),
-         EXTRACT(DOW FROM "Transaction_Date")
+GROUP BY
+    TRIM(TO_CHAR("Transaction_Date", 'Day')),
+    EXTRACT(DOW FROM "Transaction_Date")
 ORDER BY EXTRACT(DOW FROM "Transaction_Date");
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2020.11.16.png)
+![Fraud by Day of Week](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2020.11.16.png)
 
-Description
+Analyzes recurring weekly fraud patterns.
 
-This query analyzes fraudulent transactions by the day of the week on which they occurred. It filters only fraudulent transactions and groups them by weekday to calculate the total number of fraud cases and the total fraud amount. The results are displayed in chronological order from Sunday through Saturday, making it easier to identify weekly fraud patterns.
+---
 
-Business Insight
+## Fraud by Device Type
 
-Analyzing fraud by day of the week helps financial institutions identify recurring weekly patterns in fraudulent activity. Higher fraud volumes on specific days may be influenced by customer transaction behavior, payment cycles, weekends, or reduced operational monitoring. These insights enable fraud teams to optimize staffing, strengthen monitoring during high-risk periods, and refine fraud detection rules to proactively identify suspicious transactions before significant financial losses occur.
-
-**Fraud by Device Type**
-
+```sql
 SELECT
     "Device_Type",
     COUNT(*) AS "Fraud Transactions",
@@ -837,19 +492,17 @@ FROM transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY "Device_Type"
 ORDER BY "Fraud Transactions" DESC;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2020.14.56.png)
+![Fraud by Device Type](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2020.14.56.png)
 
-Description
+Compares fraud volume and financial impact across device types.
 
-This query analyzes fraudulent transactions by device type. It filters only fraudulent transactions and groups them based on the device used to initiate the transaction. For each device type, it calculates the total number of fraud cases, total fraud amount, and average fraud amount, helping identify which devices are most frequently associated with fraudulent activity.
+---
 
-Business Insight
+## Fraud by Channel
 
-Analyzing fraud by device type enables financial institutions to identify devices that present a higher fraud risk. A higher concentration of fraudulent transactions originating from a particular device type may indicate vulnerabilities in authentication mechanisms or increased exploitation by fraudsters. These insights help banks strengthen device-based risk controls, enhance authentication processes, and prioritize fraud monitoring for high-risk devices to reduce financial losses and improve customer security.
-
-**Fraud by Channel**
-
+```sql
 SELECT
     "Channel",
     COUNT(*) AS "Fraud Transactions",
@@ -859,66 +512,72 @@ FROM transactions
 WHERE "Is_Fraud" = 'Yes'
 GROUP BY "Channel"
 ORDER BY "Fraud Transactions" DESC;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2021.22.37.png)
+![Fraud by Channel](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-07-25%20at%2021.22.37.png)
 
-Description
+Identifies banking channels with higher fraud activity and loss.
 
-This query analyzes fraudulent transactions across different banking channels. It filters only fraudulent transactions and groups them by transaction channel to calculate the total number of fraud cases, total fraud amount, and average fraud amount. The results help identify which banking channels experience the highest concentration of fraudulent activity.
+---
 
-Business Insight
+# Fraud & AML Rule Engine
 
-Analyzing fraud by transaction channel enables financial institutions to identify channels that are more vulnerable to fraudulent activities. A higher volume of fraud within a specific channel may indicate weaknesses in authentication controls or increased exploitation by fraudsters. These insights help banks strengthen channel-specific security measures, enhance fraud detection rules, and allocate monitoring resources to high-risk transaction channels, ultimately reducing financial losses and improving customer protection.
+The project extends descriptive analysis with rule-based transaction monitoring.
 
-## **The next enhancement is to develop a rule-based Fraud & AML Detection Engine that identifies suspicious transactions using banking business rules. This includes implementing High Value Transaction Detection, Velocity Detection, International Transaction Monitoring, Structuring Detection, Customer Risk Scoring, and Fraud Alert Generation before integrating these results into interactive Power BI dashboards.**
+The rules are stored as independent indicators so they can be evaluated separately and combined later into broader risk assessments.
 
-# High Value Transaction Detection Rule
+## High Value Transaction Rule
 
-A new column, **Rule_High_Value**, has been introduced in the `transactions` table to store the outcome of the High Value Transaction Detection Rule. This rule is implemented separately from the original dataset to preserve the existing fraud indicators while enabling a custom, rule-based fraud detection engine. The same design approach will be used for additional fraud and AML rules, allowing each rule to be evaluated independently before contributing to the overall customer risk assessment.
+A `Rule_High_Value` column was added to the `transactions` table.
 
+```sql
 UPDATE transactions
 SET "Rule_High_Value" =
 CASE
     WHEN "Amount" >= 7000 THEN 'Yes'
     ELSE 'No'
 END;
+```
 
-## Rule Logic
+Transactions of **$7,000 or more** are flagged as high value.
 
-The High Value Transaction Rule classifies each transaction based on its monetary value.
+### Validation
 
-Transactions with an amount greater than or equal to **$7,000** are marked as **Yes** in the `Rule_High_Value` column, while all remaining transactions are marked as **No**.
-
-This rule serves as one of the independent fraud indicators within the custom Fraud & AML Rule Engine. On its own, it does not determine whether a transaction is fraudulent; instead, it contributes to a broader risk assessment when combined with additional fraud and AML detection rules.
-
+```sql
 SELECT
     "Rule_High_Value",
     COUNT(*) AS Total
 FROM transactions
 GROUP BY "Rule_High_Value";
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-07%20at%2018.07.01.png)
+![High Value Rule Validation](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-07%20at%2018.07.01.png)
 
-### High Velocity Transaction Rule
+The rule flagged **125,046 transactions (12.50%)**.
 
-Implemented the Rule_High_Velocity detection logic using a rolling 24-hour transaction window.
+---
 
-Transactions are flagged as Yes when a customer performs 5 or more transactions within a 24-hour period. The rule helps identify unusually high transaction frequency that may indicate suspicious activity.
+## High Velocity Transaction Rule
 
-Validation confirmed that multiple customer transactions were successfully flagged by the rule.
+`Rule_High_Velocity` identifies customers with unusually frequent transaction activity.
 
-### Transaction Type Frequency Analysis
+A rolling 24-hour window is used. A transaction is flagged when the customer has **5 or more transactions within the previous 24 hours**.
 
-Analyzed transaction frequency by customer and transaction type using `Customer_ID` and `Transaction_Type`.
+The rule is designed to identify unusual transaction frequency and does not independently classify a transaction as fraudulent.
 
-The analysis covered five transaction categories:
+### Validation
 
-* Bill Payment
-* Deposit
-* Purchase
-* Transfer
-* Withdrawal
-  
+- Flagged transactions: **2,266**
+- Non-flagged transactions: **997,734**
+- Flag rate: **0.23%**
+
+This makes the velocity rule more selective than the high-value rule.
+
+---
+
+## Transaction Frequency by Type
+
+```sql
 SELECT
     "Customer_ID",
     "Transaction_Type",
@@ -930,15 +589,17 @@ GROUP BY
 ORDER BY
     "Customer_ID",
     "Transaction_Type";
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-07%20at%2023.44.53.png)
+![Transaction Frequency Analysis](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-07%20at%2023.44.53.png)
 
-Transaction counts varied across customers and transaction types. For example, Customer 1 recorded 12 Bill Payments, 24 Deposits, 27 Purchases, 21 Transfers, and 13 Withdrawals.
+This establishes a behavioral baseline by customer and transaction type.
 
-The analysis provides a behavioral baseline for each customer and transaction type. The results will be used to determine whether transaction frequency can support additional AML detection rules.
+---
 
-### Transaction Amount Analysis by Type
+## Transaction Amount by Type
 
+```sql
 SELECT
     "Transaction_Type",
     COUNT(*) AS transaction_count,
@@ -947,70 +608,35 @@ SELECT
 FROM transactions
 GROUP BY "Transaction_Type"
 ORDER BY maximum_amount DESC;
+```
 
-Analyzed transaction amounts across each transaction type using transaction count, average amount, and maximum amount.
+The transaction types show similar average values, approximately $4,000, with maximum values close to $8,000. Therefore, the high-value rule is retained as a general amount-based rule rather than creating separate thresholds by transaction type.
 
-The results showed a similar distribution across all transaction types:
+---
 
-| Transaction Type | Transaction Count | Average Amount | Maximum Amount |
-| ---------------- | ----------------: | -------------: | -------------: |
-| Bill Payment     |           200,696 |      $4,001.38 |      $7,999.99 |
-| Transfer         |           199,763 |      $4,001.50 |      $7,999.99 |
-| Deposit          |           200,421 |      $4,003.30 |      $7,999.98 |
-| Purchase         |           199,383 |      $4,004.14 |      $7,999.97 |
-| Withdrawal       |           199,737 |      $4,001.86 |      $7,999.94 |
+## AML Rule Validation
 
-The average transaction amounts are approximately $4,000 across all transaction types, while the maximum values are consistently close to $8,000. This indicates that transaction type does not materially change the typical transaction amount in this dataset.
-
-The existing High Value Transaction Rule is therefore retained as the primary amount-based detection rule rather than creating separate amount thresholds for each transaction type.
-
-### AML Rule Validation Results
-
-Validated the outputs of the implemented AML detection rules by counting flagged and non-flagged transactions.
-
+```sql
 SELECT
     COUNT(*) FILTER (WHERE "Rule_High_Value" = 'Yes') AS high_value_yes,
     COUNT(*) FILTER (WHERE "Rule_High_Value" = 'No') AS high_value_no,
     COUNT(*) FILTER (WHERE "Rule_High_Velocity" = 'Yes') AS high_velocity_yes,
     COUNT(*) FILTER (WHERE "Rule_High_Velocity" = 'No') AS high_velocity_no
 FROM transactions;
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.21.14.png)
+![AML Rule Validation](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.21.14.png)
 
-**High Value Rule:** Identifies transactions that meet the defined high-value transaction threshold. It flagged 125,046 transactions, representing 12.50% of the dataset.
+The validation confirms the coverage of both rules:
 
-**High Velocity Rule:** Identifies customers with 5 or more transactions within a rolling 24-hour period. It flagged 2,266 transactions, representing 0.23% of the dataset.
+- **High Value:** 125,046 flagged transactions, 12.50%
+- **High Velocity:** 2,266 flagged transactions, 0.23%
 
-This validation is important because it confirms that both detection rules are producing measurable results and shows how frequently each rule is triggered across the dataset. The High Value rule provides broader coverage, while the High Velocity rule is more selective and identifies less common transaction-frequency patterns.
+---
 
-# High Velocity Transaction Detection Rule
+## AML Rule Overlap Analysis
 
-A new column, `Rule_High_Velocity`, was introduced in the `transactions` table to identify customers with unusually high transaction frequency.
-
-## Rule Logic
-
-The rule uses a rolling 24-hour window for each customer.
-
-A transaction is flagged as `Yes` when the customer has completed 5 or more transactions within the previous 24 hours. Otherwise, it is marked as `No`.
-
-This rule is designed to identify unusually frequent transaction activity that may require further investigation. It does not independently determine whether a transaction is fraudulent.
-
-## Rule Validation
-
-The rule was validated across the 1,000,000 transaction dataset.
-
-- Flagged transactions: 2,266
-- Non-flagged transactions: 997,734
-- Flag rate: 0.23%
-
-The low flag rate indicates that the rule is selective and identifies relatively uncommon high-frequency transaction patterns.
-
-This validation is important because it shows the coverage of each detection rule. The high-value rule identifies a broader set of transactions, while the high-velocity rule is more selective and identifies relatively uncommon transaction-frequency patterns.
-
-### AML Rule Overlap Analysis
-
-Analyzed the overlap between the `Rule_High_Value` and `Rule_High_Velocity` detection rules to understand how the two rules behave together.
-
+```sql
 SELECT
     CASE
         WHEN "Rule_High_Value" = 'Yes'
@@ -1026,82 +652,111 @@ SELECT
 FROM transactions
 GROUP BY rule_result
 ORDER BY transaction_count DESC;
-
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.56.16.png)
-
-Transactions were categorized into four groups:
-
-- **High Value Only** - flagged by the High Value rule but not the High Velocity rule.
-- **High Velocity Only** - flagged by the High Velocity rule but not the High Value rule.
-- **Both Rules** - flagged by both detection rules.
-- **No Rule Triggered** - did not meet either detection criterion.
-
-This analysis is important because it shows whether the two AML rules identify the same transactions or capture different suspicious patterns. It also helps evaluate whether the rules provide complementary coverage of transaction risk.
-
-
-## Metabase Dashboard
-
-Metabase was used as the BI layer to connect the PostgreSQL `banking_aml` database and build an interactive fraud and AML monitoring dashboard.
-
-### Data Connection
-
-```text
-CSV Data → PostgreSQL (banking_aml) → Metabase → Dashboard
 ```
 
-The dashboard primarily uses the `Transactions`, `Customers`, and `Accounts` tables. Metabase's query builder was used for aggregations, filters, grouping, and calculated metrics. Results were validated against SQL queries in PostgreSQL.
+![AML Rule Overlap](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-08%20at%2000.56.16.png)
 
-### Dashboard Visuals
+Transactions are classified into:
 
+- **High Value Only**
+- **High Velocity Only**
+- **Both Rules**
+- **No Rule Triggered**
 
-| Visual                                     | How it was created                                             | Purpose                                               |
-| ------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------------------- |
-| **Total Transactions**                     | Count of transaction records                                   | Shows overall transaction volume                      |
-| **Fraudulent Transactions**                | Count filtered by `Is_Fraud = Yes`                             | Measures confirmed fraud volume                       |
-| **Fraudulent Transaction Amount**          | Sum of `Amount`, filtered by fraud                             | Measures transaction value involved in fraud          |
-| **High-Risk Transactions**                 | Count filtered by high customer risk                           | Measures high-risk transaction volume                 |
-| **High-Risk Transaction Value**            | Sum of `Amount`, filtered by high risk                         | Measures financial exposure from high-risk activity   |
-| **Fraud Rate**                             | Custom expression: `CountIf(Is Fraud = "Yes") / Count() × 100` | Measures fraud as a percentage of transactions        |
-| **AML Flagged Transactions**               | Count filtered by `AML_Flag = Yes`                             | Measures potentially suspicious activity              |
-| **Total Fraud Loss**                       | Sum of `Fraud_Loss_Amount`, filtered by fraud                  | Measures financial impact of fraud                    |
-| **High-Risk Transactions by Country**      | Count grouped by country, filtered to high risk                | Identifies geographic risk concentration              |
-| **Account Status Distribution**            | Count grouped by account status                                | Shows active vs. dormant accounts                     |
-| **Fraud Loss by Channel**                  | Fraud loss summed and grouped by channel                       | Identifies channels with the highest financial impact |
-| **Transaction Volume by Risk Level**       | Transaction count grouped by customer risk                     | Compares activity across risk categories              |
-| **Fraudulent Transactions by Channel**     | Fraud count grouped by channel                                 | Identifies channels with higher fraud volume          |
-| **Transaction Distribution by Risk Level** | Count grouped by risk level with percentage display            | Shows the composition of transaction activity         |
-| **Fraud by Customer Segment**              | Fraud count grouped by customer segment                        | Compares fraud activity across customer groups        |
-| **Fraud Trend Over Time**                  | Fraud count grouped by transaction date/week                   | Tracks changes in fraud activity over time            |
-| **Top Fraud Types**                        | Fraud count grouped by fraud type and sorted descending        | Identifies the most common fraud patterns             |
+The overlap analysis shows whether the rules identify similar transactions or provide complementary coverage.
 
+---
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.20.png)
+# Metabase Dashboard
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.44.png)
+Metabase connects to the PostgreSQL `banking_aml` database and provides the interactive BI layer.
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.54.png)
+```text
+CSV Data → PostgreSQL → Metabase → Fraud & AML Dashboard
+```
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.23.png)
+The dashboard uses the `Transactions`, `Customers`, and `Accounts` tables. Metabase's query builder was used for filtering, grouping, aggregations, and calculated metrics.
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.37.png)
+## Dashboard Visuals
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.52.png)
+| Visual | Creation | Purpose |
+|---|---|---|
+| **Total Transactions** | Count of transactions | Overall transaction volume |
+| **Fraudulent Transactions** | Count where `Is_Fraud = Yes` | Confirmed fraud volume |
+| **Fraudulent Transaction Amount** | Sum of `Amount` for fraud | Fraud-related transaction value |
+| **High-Risk Transactions** | Count of high-risk transactions | High-risk activity volume |
+| **High-Risk Transaction Value** | Sum of `Amount` for high-risk transactions | Financial exposure |
+| **Fraud Rate** | `CountIf(Is Fraud = "Yes") / Count() × 100` | Percentage of transactions that are fraudulent |
+| **AML Flagged Transactions** | Count where `AML_Flag = Yes` | AML monitoring activity |
+| **Total Fraud Loss** | Sum of `Fraud_Loss_Amount` for fraud | Financial impact |
+| **High-Risk Transactions by Country** | Count grouped by country | Geographic risk concentration |
+| **Account Status Distribution** | Count grouped by status | Active vs. dormant accounts |
+| **Fraud Loss by Channel** | Fraud loss grouped by channel | Channel-level financial impact |
+| **Transaction Volume by Risk Level** | Count grouped by customer risk | Risk-level comparison |
+| **Fraudulent Transactions by Channel** | Fraud count grouped by channel | Channel fraud volume |
+| **Transaction Distribution by Risk Level** | Risk-level count shown as percentage | Risk composition |
+| **Fraud by Customer Segment** | Fraud count grouped by segment | Segment comparison |
+| **Fraud Trend Over Time** | Weekly fraud count | Fraud trend monitoring |
+| **Top Fraud Types** | Fraud count grouped and sorted by type | Most common fraud patterns |
 
-![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.59.png)
+### Visualization Types
 
-### Visualization Selection
+- **Number cards** → headline KPIs
+- **Bar charts** → category comparisons and rankings
+- **Donut charts** → proportional distributions
+- **Map** → geographic risk
+- **Line/area chart** → fraud trends
 
-Different chart types were selected based on the analytical purpose:
+![Metabase Dashboard](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.20.png)
 
-* **Number cards** → headline KPIs
-* **Bar charts** → category comparisons and rankings
-* **Donut charts** → proportional distributions
-* **Map** → geographic risk analysis
-* **Line/area chart** → fraud trends over time
+![Metabase Dashboard](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.44.png)
 
-### Dashboard Objective
+![Metabase Dashboard](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.54.png)
 
-The final dashboard provides a single view of **transaction volume, fraud exposure, financial loss, customer risk, AML activity, geographic risk, fraud channels, customer segments, fraud trends, and fraud types**.
+![Metabase Dashboard](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.23.png)
 
-It demonstrates the complete flow from **database → analysis → BI visualization**, with dashboard metrics validated against the underlying SQL calculations.
+![Metabase Dashboard](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.37.png)
 
+![Metabase Dashboard](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.52.png)
+
+![Metabase Dashboard](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.59.png)
+
+The dashboard brings together transaction volume, fraud exposure, financial loss, customer risk, AML activity, geographic risk, channels, segments, fraud trends, and fraud types in one monitoring view.
+
+---
+
+# Key Project Outcomes
+
+The project demonstrates an end-to-end analytics workflow covering:
+
+- Synthetic banking data generation
+- Relational data modeling
+- PostgreSQL database management
+- Data validation
+- SQL fraud and AML analysis
+- Customer and transaction risk analysis
+- Rule-based transaction monitoring
+- Fraud trend and loss analysis
+- AML rule validation and overlap analysis
+- Interactive Metabase dashboard development
+
+The result is a portfolio-scale simulation of how transaction data can move from raw records to **fraud detection rules, risk analysis, and management-level monitoring**.
+
+---
+
+# Data Disclaimer
+
+All datasets are synthetic and were generated using Python.
+
+The project does not contain:
+
+- Real customer information
+- Real banking transactions
+- Real account information
+- Real investigation cases
+- Real PEP information
+- Real sanctions screening results
+
+Fraud, AML, PEP, sanctions, structuring, velocity, risk scores, and investigation indicators are simulated for educational and portfolio purposes.
+
+The rules and scoring methods are simplified examples and should not be interpreted as production banking controls, regulatory requirements, or real financial institution methodologies.
