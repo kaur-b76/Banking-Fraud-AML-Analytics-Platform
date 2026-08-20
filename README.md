@@ -1053,6 +1053,7 @@ The dashboard primarily uses the `Transactions`, `Customers`, and `Accounts` tab
 
 ### Dashboard Visuals
 
+
 | Visual                                     | How it was created                                             | Purpose                                               |
 | ------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------------------- |
 | **Total Transactions**                     | Count of transaction records                                   | Shows overall transaction volume                      |
@@ -1072,6 +1073,21 @@ The dashboard primarily uses the `Transactions`, `Customers`, and `Accounts` tab
 | **Fraud by Customer Segment**              | Fraud count grouped by customer segment                        | Compares fraud activity across customer groups        |
 | **Fraud Trend Over Time**                  | Fraud count grouped by transaction date/week                   | Tracks changes in fraud activity over time            |
 | **Top Fraud Types**                        | Fraud count grouped by fraud type and sorted descending        | Identifies the most common fraud patterns             |
+
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.20.png)
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.44.png)
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.33.54.png)
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.23.png)
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.37.png)
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.52.png)
+
+![Fraud Type Distribution](https://github.com/kaur-b76/Banking-Fraud-AML-Analytics-Platform/blob/main/Screenshot%202026-08-20%20at%2015.34.59.png)
 
 ### Visualization Selection
 
