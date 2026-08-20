@@ -1037,3 +1037,55 @@ Transactions were categorized into four groups:
 - **No Rule Triggered** - did not meet either detection criterion.
 
 This analysis is important because it shows whether the two AML rules identify the same transactions or capture different suspicious patterns. It also helps evaluate whether the rules provide complementary coverage of transaction risk.
+
+
+## Metabase Dashboard
+
+Metabase was used as the BI layer to connect the PostgreSQL `banking_aml` database and build an interactive fraud and AML monitoring dashboard.
+
+### Data Connection
+
+```text
+CSV Data → PostgreSQL (banking_aml) → Metabase → Dashboard
+```
+
+The dashboard primarily uses the `Transactions`, `Customers`, and `Accounts` tables. Metabase's query builder was used for aggregations, filters, grouping, and calculated metrics. Results were validated against SQL queries in PostgreSQL.
+
+### Dashboard Visuals
+
+| Visual                                     | How it was created                                             | Purpose                                               |
+| ------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------------------- |
+| **Total Transactions**                     | Count of transaction records                                   | Shows overall transaction volume                      |
+| **Fraudulent Transactions**                | Count filtered by `Is_Fraud = Yes`                             | Measures confirmed fraud volume                       |
+| **Fraudulent Transaction Amount**          | Sum of `Amount`, filtered by fraud                             | Measures transaction value involved in fraud          |
+| **High-Risk Transactions**                 | Count filtered by high customer risk                           | Measures high-risk transaction volume                 |
+| **High-Risk Transaction Value**            | Sum of `Amount`, filtered by high risk                         | Measures financial exposure from high-risk activity   |
+| **Fraud Rate**                             | Custom expression: `CountIf(Is Fraud = "Yes") / Count() × 100` | Measures fraud as a percentage of transactions        |
+| **AML Flagged Transactions**               | Count filtered by `AML_Flag = Yes`                             | Measures potentially suspicious activity              |
+| **Total Fraud Loss**                       | Sum of `Fraud_Loss_Amount`, filtered by fraud                  | Measures financial impact of fraud                    |
+| **High-Risk Transactions by Country**      | Count grouped by country, filtered to high risk                | Identifies geographic risk concentration              |
+| **Account Status Distribution**            | Count grouped by account status                                | Shows active vs. dormant accounts                     |
+| **Fraud Loss by Channel**                  | Fraud loss summed and grouped by channel                       | Identifies channels with the highest financial impact |
+| **Transaction Volume by Risk Level**       | Transaction count grouped by customer risk                     | Compares activity across risk categories              |
+| **Fraudulent Transactions by Channel**     | Fraud count grouped by channel                                 | Identifies channels with higher fraud volume          |
+| **Transaction Distribution by Risk Level** | Count grouped by risk level with percentage display            | Shows the composition of transaction activity         |
+| **Fraud by Customer Segment**              | Fraud count grouped by customer segment                        | Compares fraud activity across customer groups        |
+| **Fraud Trend Over Time**                  | Fraud count grouped by transaction date/week                   | Tracks changes in fraud activity over time            |
+| **Top Fraud Types**                        | Fraud count grouped by fraud type and sorted descending        | Identifies the most common fraud patterns             |
+
+### Visualization Selection
+
+Different chart types were selected based on the analytical purpose:
+
+* **Number cards** → headline KPIs
+* **Bar charts** → category comparisons and rankings
+* **Donut charts** → proportional distributions
+* **Map** → geographic risk analysis
+* **Line/area chart** → fraud trends over time
+
+### Dashboard Objective
+
+The final dashboard provides a single view of **transaction volume, fraud exposure, financial loss, customer risk, AML activity, geographic risk, fraud channels, customer segments, fraud trends, and fraud types**.
+
+It demonstrates the complete flow from **database → analysis → BI visualization**, with dashboard metrics validated against the underlying SQL calculations.
+
